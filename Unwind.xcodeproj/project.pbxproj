@@ -14,6 +14,7 @@
 		50235083215CBBA5007FD368 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50235081215CBBA5007FD368 /* LaunchScreen.storyboard */; };
 		5023508E215CBBA5007FD368 /* UnwindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5023508D215CBBA5007FD368 /* UnwindTests.swift */; };
 		50235099215CBBA5007FD368 /* UnwindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50235098215CBBA5007FD368 /* UnwindUITests.swift */; };
+		502350A7215CD050007FD368 /* BubblesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502350A6215CD050007FD368 /* BubblesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		50235094215CBBA5007FD368 /* UnwindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnwindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50235098215CBBA5007FD368 /* UnwindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnwindUITests.swift; sourceTree = "<group>"; };
 		5023509A215CBBA5007FD368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		502350A6215CD050007FD368 /* BubblesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				50235078215CBBA3007FD368 /* AppDelegate.swift */,
+				502350A6215CD050007FD368 /* BubblesView.swift */,
 				5023507A215CBBA3007FD368 /* ViewController.swift */,
 				5023507C215CBBA3007FD368 /* Main.storyboard */,
 				5023507F215CBBA5007FD368 /* Assets.xcassets */,
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				502350A7215CD050007FD368 /* BubblesView.swift in Sources */,
 				5023507B215CBBA3007FD368 /* ViewController.swift in Sources */,
 				50235079215CBBA3007FD368 /* AppDelegate.swift in Sources */,
 			);
