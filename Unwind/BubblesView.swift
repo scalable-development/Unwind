@@ -35,6 +35,8 @@ class BubblesView: UIView {
     
     private let config: BubbleConfig
     private var toggled: Set<BubbleCoordinates> = Set<BubbleCoordinates>()
+    private let hapticFeedbackGenerator =
+        UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.light)
     
     fileprivate static func createBubbleConfig(_ rect: CGRect) -> BubbleConfig {
         let bubbleCountX = floor(rect.width / BubblesView.bubbleSize)
@@ -52,11 +54,13 @@ class BubblesView: UIView {
     override init(frame: CGRect) {
         config = BubblesView.createBubbleConfig(frame)
         super.init(frame: frame)
+        backgroundColor = BubblesView.backgroundColor
     }
     
     required init?(coder aDecoder: NSCoder) {
         config = BubblesView.createBubbleConfig(UIScreen.main.bounds)
         super.init(coder: aDecoder)
+        backgroundColor = BubblesView.backgroundColor
     }
     
     override func draw(_ rect: CGRect) {
@@ -68,25 +72,27 @@ class BubblesView: UIView {
                     width: BubblesView.bubbleSize,
                     height: BubblesView.bubbleSize
                 )
-                if (self.toggled.contains(BubbleCoordinates(columnIndex: x, rowIndex: y))) {
-                    BubblesView.toggledBubbleColor.setFill()
-                } else {
-                    BubblesView.defaultBubbleColor.setFill()
-                }
-                UIRectFill(bubble)
-                BubblesView.backgroundColor.setStroke()
-                UIRectFrame(bubble)
+                let fillColor =
+                    self.toggled.contains(BubbleCoordinates(columnIndex: x, rowIndex: y))
+                        ? BubblesView.toggledBubbleColor
+                        : BubblesView.defaultBubbleColor
+                let bubbleView = BubbleView(frame: bubble, fillColor: fillColor)
+                bubbleView.draw(bubble)
             }
         }
     }
     
     fileprivate func toggleTouched(_ touches: Set<UITouch>) {
         for touch in touches {
+            hapticFeedbackGenerator.prepare()
             let location = touch.location(in: self)
             let coordinates = self.config.toBubbleCoordinates(location)
-            self.toggled.insert(coordinates)
+            if (!self.toggled.contains(coordinates)) {
+                self.toggled.insert(coordinates)
+                self.setNeedsDisplay()
+                hapticFeedbackGenerator.impactOccurred()
+            }
         }
-        self.setNeedsDisplay()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
