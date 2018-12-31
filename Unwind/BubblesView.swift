@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 @IBDesignable
 class BubblesView: UIView {
@@ -37,6 +38,7 @@ class BubblesView: UIView {
     private var toggled: Set<BubbleCoordinates> = Set<BubbleCoordinates>()
     private let hapticFeedbackGenerator =
         UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.light)
+    
     
     fileprivate static func createBubbleConfig(_ rect: CGRect) -> BubbleConfig {
         let bubbleCountX = floor(rect.width / BubblesView.bubbleSize)
@@ -91,6 +93,7 @@ class BubblesView: UIView {
                 self.toggled.insert(coordinates)
                 self.setNeedsDisplay()
                 hapticFeedbackGenerator.impactOccurred()
+                playSound()
             }
         }
     }
@@ -103,6 +106,17 @@ class BubblesView: UIView {
         toggleTouched(touches)
     }
     
+    var player: AVAudioPlayer?
+    fileprivate func playSound() {
+        if let asset = NSDataAsset(name: "click") {
+            do {
+                player = try AVAudioPlayer(data:asset.data, fileTypeHint: "wav")
+                player?.play()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension UIColor {

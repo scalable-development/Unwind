@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         get {
             return .portrait
-            
         }
     }
     
